@@ -22,8 +22,17 @@ Komutlar Docker ortamının içinde çalıştırılmaktadır. Repo klasöründe:
 olan ortama ikinci bir kabuk açılmaktadır. Sunucuyu birinci, istemciyi ikinci terminalde
 çalıştırınız. Bir programı durdurmak için `Ctrl+C` kullanınız.
 
-Go bilgisayarınızda kuruluysa Docker olmadan da çalıştırabilirsiniz: aşağıdaki
-`ders NN ...` komutları yerine repo klasöründe `go run ./KLASÖR ...` yazınız.
+### Docker olmadan (Go bilgisayarınızda kuruluysa)
+
+Komutlar **repo klasöründe** şu karşılıklarıyla çalıştırılmaktadır:
+
+| Docker'da | Bilgisayarınızda |
+|---|---|
+| `ders 11` | `go run ./11-dinleme-ve-ilan-adresi` |
+| `cd /calisma` ve `strace ... ./d11 ...` | `go build -o d11 ./11-dinleme-ve-ilan-adresi` ve `strace ... ./d11 ...` |
+
+Linux'ta strace ve nc paketleri kurulu olmalıdır. Windows ve macOS'ta bazı sistem
+çağrısı deneyleri (strace) yalnızca Docker'da yapılabilmektedir.
 
 ## Çalıştırmak
 
@@ -32,7 +41,8 @@ Tek terminal yeterlidir:
 ```bash
 ders 11                              # yalnızca 127.0.0.1:7100
 ders 11 -dinle 0.0.0.0:7100          # bütün arayüzler
-ders 11 -dinle 172.17.0.2:7100       # yalnızca bu IP (ders 11 çıktısındaki eth0 adresini yazınız)
+ders 11 -dinle 172.17.0.2:7100       # yalnızca bu IP: ders 11 çıktısındaki 127.0.0.1 dışındaki
+                                     # bir adresi yazınız (Docker'da genellikle eth0, 172.17.x.x)
 ```
 
 İki makineyle (laboratuvarda):

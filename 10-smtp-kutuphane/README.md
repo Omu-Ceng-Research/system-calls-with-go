@@ -24,8 +24,18 @@ Komutlar Docker ortamının içinde çalıştırılmaktadır. Repo klasöründe:
 olan ortama ikinci bir kabuk açılmaktadır. Sunucuyu birinci, istemciyi ikinci terminalde
 çalıştırınız. Bir programı durdurmak için `Ctrl+C` kullanınız.
 
-Go bilgisayarınızda kuruluysa Docker olmadan da çalıştırabilirsiniz: aşağıdaki
-`ders NN ...` komutları yerine repo klasöründe `go run ./KLASÖR ...` yazınız.
+### Docker olmadan (Go bilgisayarınızda kuruluysa)
+
+Komutlar **repo klasöründe** şu karşılıklarıyla çalıştırılmaktadır:
+
+| Docker'da | Bilgisayarınızda |
+|---|---|
+| `ders 10 ...` | `go run ./10-smtp-kutuphane ...` |
+| `-dosya /kod/go.mod` | `-dosya go.mod` |
+| `cd /calisma` ve `strace ... ./d10 ...` | `go build -o d10 ./10-smtp-kutuphane` ve `strace ... ./d10 ...` |
+
+Linux'ta strace ve nc paketleri kurulu olmalıdır. Windows ve macOS'ta bazı sistem
+çağrısı deneyleri (strace) yalnızca Docker'da yapılabilmektedir.
 
 ## Go, sahte sunucuyla (hesap gerekmez)
 
