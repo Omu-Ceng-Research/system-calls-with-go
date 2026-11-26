@@ -1,0 +1,14 @@
+{
+  // VS Code + "Dev Containers" eklentisi: klasörü açınız, "Reopen in Container" seçiniz.
+  "name": "Sistem Çağrıları (Go)",
+  "image": "ghcr.io/omu-ceng-research/sysprog-go:latest",
+  "runArgs": ["--cap-add=SYS_PTRACE", "--hostname=sysprog-cagri"],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/kod,type=bind",
+  "workspaceFolder": "/kod",
+  "mounts": ["source=sysprog-cagri-calisma,target=/calisma,type=volume"],
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.go"]
+    }
+  }
+}
