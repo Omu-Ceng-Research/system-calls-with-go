@@ -125,7 +125,7 @@ ile göndererek karışmanın nasıl oluştuğunu göstermektedir.
 cd /calisma
 strace -f -e trace=accept4,read,close ./d07 sunucu
 strace -f -e trace=write,futex ./d07 istemci -yazim parcali -gorev 3 -tur 1
-strace -f -c -e trace=write,futex,clone3 ./d07 istemci -yazim kilitli
+strace -f -c -e trace=write,futex,clone ./d07 istemci -yazim kilitli
 ```
 
 Java tarafı için (bilgisayarınızda JDK ve strace varsa):
@@ -135,4 +135,6 @@ cd 07-cok-istemcili-tcp/java/Client && javac Client.java
 strace -f -c -e trace=clone3 java Client      # Ctrl+C: ~82 clone3 (52'si programın thread'leri)
 ```
 
-Go istemcisinde 52 goroutine için `clone3` sayısının 52 olmadığını karşılaştırınız.
+Go istemcisinde 52 goroutine için yalnızca birkaç (~6) `clone` görülmektedir; Java
+istemcisinde ise her thread bir `clone3`'tür. Go thread'leri `clone`, Java (glibc) ise
+`clone3` ile açmaktadır; ikisi de yeni bir işletim sistemi thread'i oluşturmaktadır.

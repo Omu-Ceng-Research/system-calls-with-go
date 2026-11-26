@@ -3,7 +3,7 @@
 // 2023-24 dönemindeki "Multi-threaded TCP Sockets with Java" örneğinin
 // (Server.java, Client.java) Go karşılığıdır.
 //
-// İlgili sistem çağrıları: accept4, read, write, clone3, futex, epoll_pwait
+// İlgili sistem çağrıları: accept4, read, write, clone, futex, epoll_pwait
 // Ödevde nerede: koordinatörün aynı anda birden fazla istemciye hizmet vermesi (3. bölüm),
 // düğümlere paralel gRPC istekleri (5.4)
 //
@@ -89,9 +89,10 @@ func sunucu() {
 			continue
 		}
 		// Java: new Thread(new ClientHandler(clientSocket)).start()
-		// Java'da new Thread bir clone(2) yapıp yeni bir işletim sistemi thread'i
+		// Java'da new Thread bir clone3(2) yapıp yeni bir işletim sistemi thread'i
 		// açmaktadır. go ifadesi ise sistem çağrısı yapmamaktadır; goroutine Go runtime'ının
-		// içinde oluşturulmaktadır. Runtime gerekirse birkaç thread'i (clone3) kendisi açmaktadır.
+		// içinde oluşturulmaktadır. Runtime gerekirse birkaç thread'i clone(2) ile kendisi
+		// açmaktadır: 52 goroutine'li istemcide strace ~6 clone göstermektedir.
 		go istemciyleIlgilen(conn)
 	}
 }

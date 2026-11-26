@@ -124,6 +124,10 @@ ayrıntılı olarak gösterilen dört fark şunlardır:
 
 ## 4. strace ile gözlem
 
+> **Ayrıntılı Türkçe kılavuz:** [STRACE.md](STRACE.md). Çıktının nasıl okunacağı, bütün
+> önemli seçenekler, Go/Python/Java programlarının izlenmesi ve ödev için hazır tarifler
+> gerçek çıktılı örneklerle anlatılmıştır.
+
 Programlar `ders NN` ile derlendiğinde binary `/calisma/dNN` olarak saklanmaktadır.
 Gözlem için bu binary `strace` altında doğrudan çalıştırılmalıdır:
 
@@ -157,6 +161,7 @@ bölümüne bakınız.
 | `05-tcp-buyuk-harf` … `12-so-reuseaddr` | Örnekler: her birinde `README.md`, `main.go` ve varsa eski Python/Java kodları |
 | `baslat.cmd`, `baslat.ps1`, `baslat.sh` | Ortamı başlatan scriptler |
 | `.devcontainer/` | VS Code "Dev Containers" ayarı |
+| `STRACE.md` | strace için Türkçe kılavuz |
 | `kontrol.sh` | Bütün örnekleri derleyip kısa biçimde sırayla çalıştırmaktadır |
 
 ## Lisans
