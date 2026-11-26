@@ -33,15 +33,15 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"strings"
-	"sync"
-	"time"
-	"unicode"
+	"flag"    // NewFlagSet, ExitOnError
+	"fmt"     // Fprintln, Println, Printf
+	"log"     // Fatal, Print
+	"net"     // ListenPacket, Dial, JoinHostPort
+	"os"      // Args, Stderr, Exit
+	"strings" // HasPrefix, ToUpperSpecial, Repeat
+	"sync"    // WaitGroup
+	"time"    // Now, Second, Sleep
+	"unicode" // TurkishCase
 )
 
 const port = "12000"

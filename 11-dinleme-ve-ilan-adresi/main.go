@@ -37,12 +37,12 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"time"
+	"flag" // String, Parse
+	"fmt"  // Println, Printf
+	"log"  // Fatal
+	"net"  // Interfaces, IPNet, Listen, SplitHostPort, JoinHostPort, DialTimeout, Dial, UDPAddr
+	"os"   // Stat
+	"time" // Second
 )
 
 func main() {

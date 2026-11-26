@@ -38,18 +38,18 @@
 package main
 
 import (
-	"bytes"
-	"encoding/base64"
-	"flag"
-	"fmt"
-	"log"
-	"mime"
-	"mime/multipart"
-	"net"
-	"net/smtp"
-	"net/textproto"
-	"os"
-	"path/filepath"
+	"bytes"           // Buffer
+	"encoding/base64" // StdEncoding
+	"flag"            // NewFlagSet, ExitOnError
+	"fmt"             // Fprintln, Printf, Fprintf, Sprintf
+	"log"             // Fatal
+	"mime"            // QEncoding
+	"mime/multipart"  // NewWriter
+	"net"             // SplitHostPort
+	"net/smtp"        // Auth, PlainAuth, SendMail
+	"net/textproto"   // MIMEHeader
+	"os"              // Args, Stderr, Exit, Getenv, ReadFile
+	"path/filepath"   // Base
 )
 
 func main() {

@@ -43,16 +43,16 @@
 package main
 
 import (
-	"bufio"
-	"encoding/binary"
-	"encoding/gob"
-	"encoding/json"
-	"flag"
-	"fmt"
-	"io"
-	"log"
-	"net"
-	"os"
+	"bufio"           // NewReader
+	"encoding/binary" // LittleEndian, Read
+	"encoding/gob"    // NewEncoder, NewDecoder
+	"encoding/json"   // NewEncoder, NewDecoder
+	"flag"            // NewFlagSet, ExitOnError
+	"fmt"             // Fprintln, Println, Printf, Errorf
+	"io"              // Writer, Reader, ReadFull
+	"log"             // Fatal, Print
+	"net"             // Dial, JoinHostPort, Listen, Conn
+	"os"              // Args, Stderr, Exit
 )
 
 const port = "9991"

@@ -54,16 +54,16 @@
 package main
 
 import (
-	"bufio"
-	"crypto/tls"
-	"encoding/base64"
-	"flag"
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"strings"
-	"time"
+	"bufio"           // Reader, NewReader
+	"crypto/tls"      // Dial, Config
+	"encoding/base64" // StdEncoding
+	"flag"            // NewFlagSet, ExitOnError
+	"fmt"             // Fprintln, Println, Print
+	"log"             // Fatal, Fatalf
+	"net"             // Conn, SplitHostPort, DialTimeout, Listen
+	"os"              // Args, Stderr, Exit, Getenv
+	"strings"         // TrimRight, HasPrefix, Split, ToUpper, SplitN, Contains, TrimPrefix
+	"time"            // Second
 )
 
 func main() {

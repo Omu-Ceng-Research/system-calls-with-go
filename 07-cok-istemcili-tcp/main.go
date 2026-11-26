@@ -41,14 +41,14 @@
 package main
 
 import (
-	"bufio"
-	"flag"
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"strings"
-	"sync"
+	"bufio"   // NewScanner
+	"flag"    // NewFlagSet, ExitOnError
+	"fmt"     // Fprintln, Println, Printf, Sscanf, Sprintf, Sprint
+	"log"     // Fatal, Print
+	"net"     // Listen, Conn, Dial, JoinHostPort
+	"os"      // Args, Stderr, Exit
+	"strings" // Repeat
+	"sync"    // Mutex, WaitGroup
 )
 
 const port = "9991"

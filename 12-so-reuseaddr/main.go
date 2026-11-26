@@ -32,14 +32,14 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"strings"
-	"syscall"
-	"time"
+	"context" // Background
+	"fmt"     // Printf, Sprintf
+	"log"     // Fatal
+	"net"     // Listen, Dial, Listener, ListenConfig
+	"os"      // ReadFile
+	"strings" // Split, Fields, HasSuffix
+	"syscall" // RawConn, SetsockoptInt, SOL_SOCKET, SO_REUSEADDR
+	"time"    // Sleep, Millisecond
 )
 
 const adres = "127.0.0.1:7200"

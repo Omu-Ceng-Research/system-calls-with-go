@@ -53,13 +53,13 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"strings"
-	"unicode"
+	"bufio"   // NewReader
+	"fmt"     // Fprintln, Println, Printf, Print
+	"log"     // Fatal, Print
+	"net"     // Listen, Conn, Dial, JoinHostPort
+	"os"      // Args, Stderr, Exit, Stdin
+	"strings" // ToUpperSpecial, TrimRight
+	"unicode" // TurkishCase
 )
 
 const port = "12001"
