@@ -227,7 +227,7 @@ DENEYİNİZ
 
  1. Üç biçimin gönderdiği bayt sayılarını karşılaştırınız.
  2. Sunucu yerine nc ile dinleyerek gönderilen baytları inceleyiniz:
-    nc -l -p 9991 | xxd          (ikinci terminalde: ders 08 istemci -bicim json)
+    nc -l -p 9991 | hexdump -C         (ikinci terminalde: ders 08 istemci -bicim json)
     Aynısını gob ve ikili için tekrarlayınız. Hangisinde alan adları ("Ad", "Yas")
     baytların içinde yer almaktadır?
  3. Kisi yapısına yeni bir alan (ör. Sehir string) ekleyiniz ve yalnızca istemciyi

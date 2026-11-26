@@ -9,6 +9,11 @@ Her programda, soket işlemi yapan satırların yanında o satırın ürettiği 
 çağrıları** yazılmıştır (`→` ile başlayan yorumlar). Bu yorumlar tahmin değildir;
 programların `strace` çıktısından alınmıştır.
 
+Her örneğin klasöründe, varsa eski yıllardaki **Python ve Java kodları** da yer almaktadır.
+Bu kodların satırlarına da aynı biçimde sistem çağrısı yorumları eklenmiştir; kodun kendisi
+değiştirilmemiştir. Her klasördeki `README.md`, sunucuyu ve istemciyi (Go, Python, Java
+ve karışık olarak) çalıştırmak için gereken komutları içermektedir.
+
 > **Ön koşul:** [go-baslangic](https://github.com/Omu-Ceng-Research/go-baslangic) reposundaki
 > 15 dersin tamamlanmış olması önerilmektedir. Bu repo aynı Docker ortamını kullanmaktadır.
 
@@ -46,13 +51,14 @@ daha çalıştırınız; script açık olan ortama ikinci bir terminal açmaktad
 
 ## 2. Her örnekte ne yapacaksınız?
 
-1. Örneğin `main.go` dosyasını baştan sona okuyunuz. Konunun açıklaması dosyanın
-   başındadır.
-2. `ders NN` ile çalıştırınız (ör. `ders 06 coklu`). Sunucu/istemci örneklerinde
+1. Örneğin klasöründeki `README.md` dosyasını açınız; çalıştırma komutları oradadır.
+2. `main.go` dosyasını (ve varsa eski Python/Java kodlarını) baştan sona okuyunuz.
+   Konunun açıklaması `main.go` dosyasının başındadır.
+3. `ders NN` ile çalıştırınız (ör. `ders 06 coklu`). Sunucu/istemci örneklerinde
    `ders 05 sunucu` ve ikinci terminalde `ders 05 istemci` yazınız.
-3. Açıklamadaki **Gözlemleyiniz** satırlarındaki `strace` komutlarını çalıştırınız ve
+4. Açıklamadaki **Gözlemleyiniz** satırlarındaki `strace` komutlarını çalıştırınız ve
    çıktıyı koddaki `→` yorumlarıyla satır satır karşılaştırınız.
-4. Dosyanın sonundaki **DENEYİNİZ** ve **SORULAR** bölümlerini yapınız.
+5. `main.go` dosyasının sonundaki **DENEYİNİZ** ve **SORULAR** bölümlerini yapınız.
 
 ```bash
 ders 05 sunucu           # 05. örneği derler ve /calisma'da çalıştırır
@@ -70,16 +76,20 @@ Numaralar, dersin sistem çağrısı listesindeki sıraya göre verilmiştir. Di
 
 ### Ağ ve soketler
 
-| # | Klasör | Konu | Sistem çağrıları | Kaynak |
+| # | Klasör | Konu | Sistem çağrıları | Eski kod (klasörün içinde) |
 |---|---|---|---|---|
-| 05 | [`05-tcp-buyuk-harf`](05-tcp-buyuk-harf) | TCP sunucusu ve istemcisi, Türkçe büyük harf | `socket`, `bind`, `listen`, `accept4`, `connect` | 2023-24, 1. hafta (Python) |
-| 06 | [`06-udp-buyuk-harf`](06-udp-buyuk-harf) | UDP sunucusu ve beş istemci | `recvfrom`, `sendto` | 2023-24, 1. hafta (Python) |
-| 07 | [`07-cok-istemcili-tcp`](07-cok-istemcili-tcp) | Çok istemcili sunucu, aynı soketi paylaşan goroutine'ler | `accept4`, `write`, `futex` | 2023-24, 2. hafta (Java) |
-| 08 | [`08-nesne-gonderme`](08-nesne-gonderme) | Soket üzerinden nesne: gob, JSON, elle ikili biçim | `write`, `read` | 2023-24, 3. hafta (Java) |
-| 09 | [`09-smtp-soket`](09-smtp-soket) | Kütüphanesiz SMTP istemcisi ve sahte SMTP sunucusu | `connect`, `write`, `read` | 2023-24, 3. hafta (telnet) |
-| 10 | [`10-smtp-kutuphane`](10-smtp-kutuphane) | Kütüphaneyle renkli ve ek dosyalı e-posta | `connect`, `write` | 2023-24, 4. hafta |
-| 11 | [`11-dinleme-ve-ilan-adresi`](11-dinleme-ve-ilan-adresi) | `0.0.0.0`, `127.0.0.1` ve gerçek IP; Docker'da ilan adresi | `bind`, `getsockname`, netlink | Ödev 5.4, T8 |
-| 12 | [`12-so-reuseaddr`](12-so-reuseaddr) | TIME_WAIT ve çökme sonrası aynı portu açmak | `setsockopt`, `bind` | Ödev T4, T5 |
+| 05 | [`05-tcp-buyuk-harf`](05-tcp-buyuk-harf) | TCP sunucusu ve istemcisi, Türkçe büyük harf | `socket`, `bind`, `listen`, `accept4`, `connect` | 2023-24, 1. hafta: `python/` |
+| 06 | [`06-udp-buyuk-harf`](06-udp-buyuk-harf) | UDP sunucusu ve beş istemci | `recvfrom`, `sendto` | 2023-24, 1. hafta: `python/` |
+| 07 | [`07-cok-istemcili-tcp`](07-cok-istemcili-tcp) | Çok istemcili sunucu, aynı soketi paylaşan goroutine'ler | `accept4`, `write`, `futex` | 2023-24, 2. hafta: `java/` |
+| 08 | [`08-nesne-gonderme`](08-nesne-gonderme) | Soket üzerinden nesne: gob, JSON, elle ikili biçim | `write`, `read` | 2023-24, 3. hafta: `java/` |
+| 09 | [`09-smtp-soket`](09-smtp-soket) | Kütüphanesiz SMTP istemcisi ve sahte SMTP sunucusu | `connect`, `write`, `read` | 2023-24, 3. hafta: `telnet/` |
+| 10 | [`10-smtp-kutuphane`](10-smtp-kutuphane) | Kütüphaneyle renkli ve ek dosyalı e-posta | `connect`, `write` | 2023-24, 4. hafta (alıştırma, kod yok) |
+| 11 | [`11-dinleme-ve-ilan-adresi`](11-dinleme-ve-ilan-adresi) | `0.0.0.0`, `127.0.0.1` ve gerçek IP; Docker'da ilan adresi | `bind`, `getsockname`, netlink | — (ödev 5.4, T8) |
+| 12 | [`12-so-reuseaddr`](12-so-reuseaddr) | TIME_WAIT ve çökme sonrası aynı portu açmak | `setsockopt`, `bind` | — (ödev T4, T5) |
+
+Python örnekleri Docker ortamında doğrudan çalışmaktadır (`python3`). Java için ortamda
+JDK bulunmamaktadır; 07 ve 08'in README dosyalarında Java'yı kurmadan, bir JDK
+konteyneriyle çalıştırmanın komutları verilmiştir.
 
 ### Go'daki bir soket satırı hangi sistem çağrılarını yapar?
 
@@ -144,7 +154,7 @@ bölümüne bakınız.
 
 | Yol | Açıklama |
 |---|---|
-| `05-tcp-buyuk-harf` … `12-so-reuseaddr` | Örnek programlar |
+| `05-tcp-buyuk-harf` … `12-so-reuseaddr` | Örnekler: her birinde `README.md`, `main.go` ve varsa eski Python/Java kodları |
 | `baslat.cmd`, `baslat.ps1`, `baslat.sh` | Ortamı başlatan scriptler |
 | `.devcontainer/` | VS Code "Dev Containers" ayarı |
 | `kontrol.sh` | Bütün örnekleri derleyip kısa biçimde sırayla çalıştırmaktadır |

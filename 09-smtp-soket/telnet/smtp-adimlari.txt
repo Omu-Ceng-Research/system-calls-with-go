@@ -1,0 +1,47 @@
+# 2023-24 dönemi adımları. Adımlar değiştirilmemiştir; yalnızca '→' yorumları eklenmiştir.
+#
+# '→' ile başlayan yorumlar, openssl'in o adımda yaptığı sistem çağrılarını göstermektedir:
+#     strace -f -e trace=network,read,write openssl s_client -connect smtp.gmail.com:465 -crlf -ign_eof
+#
+# Klavyeden yazılan her satır önce stdin'den okunmakta (read(0, ...)), TLS ile şifrelenmekte
+# ve sokete yazılmaktadır (write(soket, ...)). Sunucunun cevabı da şifreli okunmakta
+# (read(soket, ...)), çözülüp ekrana yazılmaktadır (write(1, ...)). Şifreleme çekirdekte değil
+# openssl'in içinde yapıldığı için strace'te soket verisi okunamaz baytlar olarak görünmektedir.
+# Aynı konuşmanın şifresiz hâli için: ../main.go ve sahte sunucu (ders 09 sahte-sunucu).
+
+#Secure telnet başlatmak için Linux/Unix Komut Satirina Giriniz
+# Aşağıdaki çağrılar bu komutun strace çıktısından alınmıştır (Ubuntu, OpenSSL 3):
+# → socket(AF_INET, SOCK_DGRAM) + connect(3, {port 53, "127.0.0.53"}) + sendmmsg + recvfrom
+#                                  DNS: smtp.gmail.com adı IP'ye çevrilmektedir
+# → openat + read("/etc/ssl/certs/...")   güvenilen sertifikalar diskten okunmaktadır
+# → socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+# → setsockopt(3, SOL_TCP, TCP_NODELAY, [1])
+# → connect(3, {port 465, sin_addr="142.251.127.109"}) = 0
+# → write(3, "\26\3\1...", ...)   TLS ClientHello (el sıkışmasının ilk mesajı)
+# → read(3, "\26\3\3\0z", 5) + read(3, ...)   her TLS kaydı önce 5 baytlık başlık,
+#                                  sonra gövde olarak iki read ile okunmaktadır
+# → write(1, "220 smtp.gmail.com ESMTP ...")    çözülmüş karşılama ekrana yazılmaktadır
+openssl s_client -connect smtp.gmail.com:465 -crlf -ign_eof
+
+# Google sunucularina baglandiktan sonra sırasıyla aşağıdaki etiketli mesajları girip ENTER tuşuna basınız:
+
+# → read(0, "EHLO localhost\n")  klavyeden
+# → write(3, <şifreli "EHLO localhost\r\n">)   -crlf: satır sonu \r\n yapılmaktadır
+# → read(3, <şifreli>) + write(1, "250-smtp.gmail.com at your service ... 250 LIMITS ...", 260)
+#   strace'te "EHLO" kelimesi yalnızca read(0, ...) satırında görünmektedir; sokete giden
+#   write(3, ...) şifreli olduğu için okunamamaktadır.
+EHLO localhost
+# → write(3, ...) ve read(3, "334 VXNlcm5hbWU6")   "Username:" base64 ile
+AUTH LOGIN 
+<your-gmail-address-encoded-as-base64>
+<yourapplication-password-generated-from-myaccounts.google.com-encoded-as-base64>
+# Bu satırdan itibaren her satır yine bir read(0) + write(3) + read(3) + write(1)'dir.
+MAIL FROM: <your-gmail-address-not-encoded>
+rcpt to: <destination-address-not-encoded>
+DATA
+Subject: System Prog. Third Week
+Burada mailin gövde mesajı gönderilmektedir.
+# → write(3, <şifreli ".\r\n">)   tek başına nokta: gövdenin sonu. Sunucu "250 2.0.0 OK ..." der.
+.
+# → write(3, ...), read(3, ...), write(1, "221 2.0.0 closing connection ..."), shutdown(3, SHUT_WR), close(3)
+QUIT

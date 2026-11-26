@@ -41,6 +41,20 @@ durdur() {
     cat sunucu.log
 }
 
+# Python sunucusu SO_REUSEADDR açmadığı için Go örneklerinden ÖNCE denenmektedir
+# (Go sunucusundan kalan TIME_WAIT bağlantıları portu ~60 sn meşgul tutmaktadır).
+calistir "05 Python" true
+sunucu python3 "$KOK/05-tcp-buyuk-harf/python/tcp-server.py"
+echo "istanbul" | ./d05 istemci | tail -1; durdur > /dev/null
+sunucu ./d05 sunucu
+echo "istanbul" | python3 "$KOK/05-tcp-buyuk-harf/python/tcp-client.py" | tail -1; durdur > /dev/null
+
+calistir "06 Python" true
+sunucu python3 -u "$KOK/06-udp-buyuk-harf/python/server.py"
+./d06 coklu -adet 1; durdur > /dev/null
+sunucu ./d06 sunucu
+timeout 1.5 python3 -u "$KOK/06-udp-buyuk-harf/python/client.py" || true; durdur > /dev/null
+
 calistir 05 true; sunucu ./d05 sunucu
 echo "istanbul ığüşöç" | ./d05 istemci; durdur
 

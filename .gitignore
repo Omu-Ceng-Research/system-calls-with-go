@@ -4,3 +4,9 @@ ders[0-9][0-9]-*
 # go build ile üretilen binary'ler
 /d[0-9][0-9]
 /d[0-9][0-9]r
+
+# Java derleme çıktıları
+*.class
+
+# Python önbelleği
+__pycache__/

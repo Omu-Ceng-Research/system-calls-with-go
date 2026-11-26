@@ -123,8 +123,13 @@ func istemciyleIlgilen(conn net.Conn) {
 
 // Satır biçimi: "gorev=<n> mesaj <n tekrar eden>". Başka bir goroutine'in verisi
 // araya girdiyse tekrar eden kısım gorev numarasıyla uyuşmamaktadır.
+// Java istemcisinin (java/Client) biçimi de tanınmaktadır:
+// "Thread_id: <id> Message <id, 1000 kez tekrar>".
 func saglamMi(satir string) bool {
 	var no int
+	if _, err := fmt.Sscanf(satir, "Thread_id: %d Message ", &no); err == nil {
+		return satir == fmt.Sprintf("Thread_id: %d Message %s", no, strings.Repeat(fmt.Sprint(no), 1000))
+	}
 	if _, err := fmt.Sscanf(satir, "gorev=%d mesaj ", &no); err != nil {
 		return false
 	}
